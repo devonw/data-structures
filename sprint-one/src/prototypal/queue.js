@@ -21,11 +21,11 @@ var queueMethods = {
 
   },
   size: function() {
-  	if(this.currentFirst === undefined){
-  	  var size = Object.keys(this).length;	
-  	} else {
-  	    size = Object.keys(this).length - 2;
-  	}
+    if (this.currentFirst === undefined) {
+      var size = Object.keys(this).length;	
+    } else {
+      size = Object.keys(this).length - 2;
+    }
     
     return size;
   }

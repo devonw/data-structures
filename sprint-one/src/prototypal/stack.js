@@ -8,23 +8,23 @@ var Stack = function() {
 
 var stackMethods = {
   index: 0,
-  push: function(value){
+  push: function(value) {
     this[this.index] = value;
     this.index++;
 
   },
   pop: function() {
-  	var removedValue = this[this.index - 1];
-  	delete this[this.index - 1];
-  	this.index--;
-  	return removedValue;
+    var removedValue = this[this.index - 1];
+    delete this[this.index - 1];
+    this.index--;
+    return removedValue;
 
   },
   size: function() {
-    if (this.index === 0){
+    if (this.index === 0) {
       var size = Object.keys(this).length;
     } else {
-       size = Object.keys(this).length - 1;
+      size = Object.keys(this).length - 1;
     }
     return size;
   }
