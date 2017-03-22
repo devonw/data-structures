@@ -7,27 +7,27 @@ var Queue = function() {
 };
 
 var queueMethods = {
-	index: 0,
+  index: 0,
 
-	currentFirst: undefined,
+  currentFirst: undefined,
 
-	enqueue: function(value) {
-		this[this.index] = value;
-		this.index++;
-		this.currentFirst = this.currentFirst++ || 0;
-	},
+  enqueue: function(value) {
+    this[this.index] = value;
+    this.index++;
+    this.currentFirst = this.currentFirst++ || 0;
+  },
 
-	dequeue: function(){
-      var removedItem = this[this.currentFirst];
-      delete this[this.currentFirst];
-      this.currentFirst++;
-      return removedItem;
-	},
+  dequeue: function() {
+    var removedItem = this[this.currentFirst];
+    delete this[this.currentFirst];
+    this.currentFirst++;
+    return removedItem;
+  },
 
-	size: function() {
-		var sizeOfThing = Object.keys(this).length - 5;
-		return sizeOfThing;
-	}
+  size: function() {
+    var sizeOfThing = Object.keys(this).length - 5;
+    return sizeOfThing;
+  }
 };
 
 
