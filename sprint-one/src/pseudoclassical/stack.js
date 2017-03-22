@@ -10,17 +10,17 @@ var Stack = function() {
 Stack.prototype.push = function(item) {
   this[this.index] = item;
   this.index++;
-}
+};
 
 Stack.prototype.pop = function() {
   var removedItem = this[this.index - 1];
   delete this[this.index - 1];
   this.index--;
   return removedItem;
-}
+};
 
 Stack.prototype.size = function() {
   return Object.keys(this).length - 1; 
-}
+};
 
 new Stack();
