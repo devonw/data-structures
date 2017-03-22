@@ -14,15 +14,15 @@ var stackMethods = {
 
   },
   pop: function() {
-  	var removedItem = this[this.index - 1];
-  	delete this[this.index - 1];
-  	this.index--;
-  	return removedItem;
+    var removedItem = this[this.index - 1];
+    delete this[this.index - 1];
+    this.index--;
+    return removedItem;
 
   },
   size: function() {
-  	var sizeOfObj = Object.keys(this).length - 4;
-  	return sizeOfObj;
+    var sizeOfObj = Object.keys(this).length - 4;
+    return sizeOfObj;
   }
 };
 
