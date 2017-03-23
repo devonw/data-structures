@@ -16,9 +16,9 @@ var queueMethods = {
   dequeue: function() {
     var removedItem = this[this.currentFirst];
     delete this[this.currentFirst];
-    for(var key in this) {
+    for (var key in this) {
       var nonStringKey = Number(key);
-      if(!isNaN(nonStringKey)) {
+      if (!isNaN(nonStringKey)) {
         console.log(nonStringKey);
         var indexShift = nonStringKey - 1;
         this[indexShift] = this[key];
