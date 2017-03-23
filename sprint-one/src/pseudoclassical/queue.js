@@ -15,11 +15,11 @@ Queue.prototype.dequeue = function() {
   delete this[this.currentLast];
   this.currentLast++;
   return removedItem;
-}
+};
 
 Queue.prototype.size = function() {
   return Object.keys(this).length - 2;
-}
+};
 
 new Queue();
 

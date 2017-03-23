@@ -11,12 +11,22 @@ var queueMethods = {
   enqueue: function(value) { 
     this[this.index] = value;
     this.index++;
-    this.currentFirst = this.currentFirst++ || 0;
+    this.currentFirst = 0;
   },
   dequeue: function() {
     var removedItem = this[this.currentFirst];
     delete this[this.currentFirst];
-    this.currentFirst++;
+    for(var key in this) {
+      var nonStringKey = Number(key);
+      if(!isNaN(nonStringKey)) {
+        console.log(nonStringKey);
+        var indexShift = nonStringKey - 1;
+        this[indexShift] = this[key];
+        delete this[key];
+      }
+    
+    }
+    this.index--;
     return removedItem;
 
   },
