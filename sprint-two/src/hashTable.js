@@ -8,6 +8,35 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   this._counter++;
+  
+  if (this._counter/this._limit > .75){
+    this._limit *= 2;
+    this._storage = LimitedArray(this._limit);
+    var self = this;
+    this._storage.each(function(bucket){
+      if (bucket) {
+        bucket.forEach(function(keyValArray){
+          self.insert(keyValArray[0], keyValArray[1]);
+        })
+      } 
+
+    })
+  }
+  if (this._counter/this._limit < .25) {
+    this._limit /= 2;
+    this._storage = LimitedArray(this._limit);
+    var self = this;
+    this._storage.each(function(bucket) {
+      if (bucket) {
+        bucket.forEach(function(keyValArray){
+          self.insert(keyValArray[0], keyValArray[1]);
+        })
+      }
+    })
+    
+    
+    
+  }
   var index = getIndexBelowMaxForKey(k, this._limit);
   if(!this._storage.get(index)) {
     this._storage.set(index, []);
@@ -24,8 +53,8 @@ HashTable.prototype.insert = function(k, v) {
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  if(this._storage.get(index).length > 0) {
-    return this._storage.get(index).find(function(innerArray){
+  if (this._storage.get(index).length > 0) {
+    return this._storage.get(index).find(function(innerArray) {
       return innerArray[0] === k;
     })[1]; 
   }
@@ -34,11 +63,11 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.get(index).forEach(function(innerArray, ind, collection){
-    if(innerArray[0] === k) {
+  this._storage.get(index).forEach(function(innerArray, ind, collection) {
+    if (innerArray[0] === k) {
       collection.splice(ind, 1);
     }
-  })
+  });
   
 };
 
