@@ -12,13 +12,13 @@ setPrototype.add = function(item) {
 
 setPrototype.contains = function(item) {
   var keys = Object.keys(this);
-  return keys.some(function(key){
-    return key === item
+  return keys.some(function(key) {
+    return key === item;
   });
 };
 
 setPrototype.remove = function(item) {
-  if(this[item]) {
+  if (this[item]) {
     delete this[item];
   }
 };
