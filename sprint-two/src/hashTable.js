@@ -8,36 +8,51 @@ var HashTable = function() {
 
 HashTable.prototype.resize = function() {
   if (this._counter / this._limit > .75) {
+    this._counter = 1;
     this._limit *= 2;
+    var savedValues = [];
+    this._storage.each(function(bucket){
+      savedValues.push(bucket);
+    })
     this._storage = LimitedArray(this._limit);
     var self = this;
-    this._storage.each(function(bucket) {
-      if (bucket) {
-        bucket.forEach(function(keyValArray) {
+    savedValues.forEach(function(arrayOfBucket) {
+      if (arrayOfBucket) {
+        arrayOfBucket.forEach(function(keyValArray) {
           self.insert(keyValArray[0], keyValArray[1]);
         });
       } 
 
     });
   }
+  
   if (this._counter / this._limit < .25) {
+    this._counter = 1;
     this._limit /= 2;
+    var savedValues = [];
+    this._storage.each(function(bucket){
+      savedValues.push(bucket);
+    })
     this._storage = LimitedArray(this._limit);
     var self = this;
-    this._storage.each(function(bucket) {
-      if (bucket) {
-        bucket.forEach(function(keyValArray) {
+    savedValues.forEach(function(arrayOfBucket) {
+      if (arrayOfBucket) {
+        arrayOfBucket.forEach(function(keyValArray) {
           self.insert(keyValArray[0], keyValArray[1]);
         });
-      }
+      } 
+
     });
   }
   
-}
+};
 
 HashTable.prototype.insert = function(k, v) {
   this._counter++;
-  this.resize();
+  if (this._counter / this._limit > .75) {
+    this.resize();
+  }
+  
   
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (!this._storage.get(index)) {
@@ -70,15 +85,15 @@ HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (this._storage.get(index)) {
     this._storage.get(index).forEach(function(innerArray, ind, collection) {
-    if (innerArray[0] === k) {
-      collection.splice(ind, 1);
-      self.resize();
-    }
-  });
+      if (innerArray[0] === k) {
+        collection.splice(ind, 1);
+        //self.resize();
+        //self._counter--;
+      }
+    });
   }
   
 };
-
 
 
 /*
