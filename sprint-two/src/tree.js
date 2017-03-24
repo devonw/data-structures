@@ -18,23 +18,23 @@ treeMethods.contains = function(target) {
   
   var truthTest = false;
   
-  function recursiveCheck(branch) {
-    if(branch.value === target) {
+  var recursiveCheck = function (branch) {
+    if (branch.value === target) {
       truthTest = true;
     }
     var nextChildren = branch.children;
-    if(nextChildren.some(function(childObj){
+    if (nextChildren.some(function(childObj) {
       return childObj.value === target;
     })) {
       return true;
     }
-    nextChildren.forEach(function(childObj){
-      childObj.children.forEach(function(obj){
-      	recursiveCheck(obj);
-      })
-    })
+    nextChildren.forEach(function(childObj) {
+      childObj.children.forEach(function(obj) {
+        recursiveCheck(obj);
+      });
+    });
     return truthTest;
-  }
+  };
   
   return recursiveCheck(this);
   
