@@ -51,6 +51,31 @@ binaryTreePrototype.contains = function(value) {
 
 };
 
+binaryTreePrototype.breadthFirstLog = function() {
+  var breadthFirstRecurse = function(node) {
+    if(node) {
+      console.log(node.value);
+      if(node.left) {
+        console.log(node.left.value);
+      }
+      if(node.right) {
+        console.log(node.right.value);
+      }
+      if(node.left) {
+        breadthFirstRecurse(node.left.left);
+        breadthFirstRecurse(node.left.right);
+      }
+      if(node.right) {
+        breadthFirstRecurse(node.right.right)
+        breadthFirstRecurse(node.right.left);
+      }
+    }
+    //console.log(node.value);
+    
+  }
+  return breadthFirstRecurse(this);
+}
+
 binaryTreePrototype.depthFirstLog = function(callback) {
   var applyFuncDownTree = function (node) {
     callback(node.value);

@@ -34,7 +34,7 @@ var LinkedList = function() {
     this.tail = this.tail.previous;
     this.tail.next = null;
     
-  }
+  };
 
   list.removeHead = function() {
     var removedHeadValue = this.head.value;

@@ -19,12 +19,12 @@ treeMethods.addChild = function(value) {
 treeMethods.removeFromParent = function() {
   var recurseDownParents = function (node) {
     delete node.parent;
-    if(node.children.length > 0) {
+    if (node.children.length > 0) {
       node.children.forEach(function(children) {
-        recurseDownParents(children)
+        recurseDownParents(children);
       });
     }
-  }
+  };
   return recurseDownParents(this);
   
 };
@@ -35,9 +35,9 @@ treeMethods.traverse = function(callback) {
     if (node.children.length > 0) {
       node.children.forEach(function(child) {
         applyCallbackRecursively(child);
-      })
+      });
     }
-  }
+  };
   return applyCallbackRecursively(this);
 };
 

@@ -70,7 +70,7 @@ describe('linkedList', function() {
     linkedList.addToTail(45666);
     linkedList.addToTail(777);
     linkedList.removeTail();
-    expect(linkedList.tail.value).to.equal(45666)
+    expect(linkedList.tail.value).to.equal(45666);
   });
 
   // add more tests here to test the functionality of linkedList
