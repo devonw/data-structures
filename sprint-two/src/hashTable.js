@@ -11,9 +11,9 @@ HashTable.prototype.resize = function() {
     this._counter = 1;
     this._limit *= 2;
     var savedValues = [];
-    this._storage.each(function(bucket){
+    this._storage.each(function(bucket) {
       savedValues.push(bucket);
-    })
+    });
     this._storage = LimitedArray(this._limit);
     var self = this;
     savedValues.forEach(function(arrayOfBucket) {
@@ -30,9 +30,9 @@ HashTable.prototype.resize = function() {
     this._counter = 1;
     this._limit /= 2;
     var savedValues = [];
-    this._storage.each(function(bucket){
+    this._storage.each(function(bucket) {
       savedValues.push(bucket);
-    })
+    });
     this._storage = LimitedArray(this._limit);
     var self = this;
     savedValues.forEach(function(arrayOfBucket) {
