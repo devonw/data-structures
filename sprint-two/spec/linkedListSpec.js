@@ -51,5 +51,13 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should be a doubly linked list', function() {
+    linkedList.addToTail(5);
+    linkedList.addToTail(54);
+    linkedList.addToTail(45666);
+    linkedList.addToTail(777);
+    expect(linkedList.head.next.next.previous.value).to.equal(5);
+  })
+
   // add more tests here to test the functionality of linkedList
 });

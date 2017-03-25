@@ -27,7 +27,7 @@ HashTable.prototype.resize = function() {
   }
   
   if (this._counter / this._limit < .25) {
-    this._counter = 1;
+    this._counter = 0;
     this._limit /= 2;
     var savedValues = [];
     this._storage.each(function(bucket) {
@@ -49,11 +49,12 @@ HashTable.prototype.resize = function() {
 
 HashTable.prototype.insert = function(k, v) {
   this._counter++;
+  
   if (this._counter / this._limit > .75) {
     this.resize();
   }
-  
-  
+
+   
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (!this._storage.get(index)) {
     this._storage.set(index, []);
@@ -79,18 +80,18 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
-  this._counter--;
-  this.resize();
   var self = this;
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (this._storage.get(index)) {
     this._storage.get(index).forEach(function(innerArray, ind, collection) {
       if (innerArray[0] === k) {
         collection.splice(ind, 1);
-        //self.resize();
-        //self._counter--;
+        self._counter--;
       }
     });
+  }
+  if(this._counter / this._limit < .25) {
+  	this.resize();
   }
   
 };
