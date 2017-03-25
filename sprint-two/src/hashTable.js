@@ -90,8 +90,8 @@ HashTable.prototype.remove = function(k) {
       }
     });
   }
-  if(this._counter / this._limit < .25) {
-  	this.resize();
+  if (this._counter / this._limit < .25) {
+    this.resize();
   }
   
 };

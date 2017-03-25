@@ -57,7 +57,21 @@ describe('linkedList', function() {
     linkedList.addToTail(45666);
     linkedList.addToTail(777);
     expect(linkedList.head.next.next.previous.value).to.equal(5);
-  })
+  });
+
+  it('should have methods named "addToHead" and "removeTail""', function() {
+    expect(linkedList.addToHead).to.be.a('function');
+    expect(linkedList.removeTail).to.be.a('function');
+  });
+
+  it('should remove tail when remove when "removeTail" is called', function() {
+    linkedList.addToTail(5);
+    linkedList.addToTail(54);
+    linkedList.addToTail(45666);
+    linkedList.addToTail(777);
+    linkedList.removeTail();
+    expect(linkedList.tail.value).to.equal(45666)
+  });
 
   // add more tests here to test the functionality of linkedList
 });

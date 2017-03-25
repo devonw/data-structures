@@ -19,10 +19,20 @@ var LinkedList = function() {
       currentNext.previous = savedCurrent;
       this.tail = Node(value);
       this.tail.previous = savedCurrent.next;
+      this.head.previous = null;
     }
   };
   
   list.addToHead = function(value) {
+    var currentHead = this.head;
+    this.head = Node(value);
+    this.head.next = currentHead;
+    
+  };
+
+  list.removeTail = function() {
+    this.tail = this.tail.previous;
+    this.tail.next = null;
     
   }
 
@@ -41,7 +51,7 @@ var LinkedList = function() {
   list.contains = function(target) {
     var current = this.head;
     while (!!current.value && !!current.next) {
-      if(current.value === target) {
+      if (current.value === target) {
         return true;
       } else {
         current = current.next;

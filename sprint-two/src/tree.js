@@ -4,14 +4,41 @@ var Tree = function(value) {
 
   // your code here
   newTree.children = [];  // fix me
-
+  newTree.parent = null;
   return newTree;
 };
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  this.children.push(Tree(value));
+  var newBranch = Tree(value);
+  newBranch.parent = this;
+  this.children.push(newBranch);
+};
+
+treeMethods.removeFromParent = function() {
+  var recurseDownParents = function (node) {
+    delete node.parent;
+    if(node.children.length > 0) {
+      node.children.forEach(function(children) {
+        recurseDownParents(children)
+      });
+    }
+  }
+  return recurseDownParents(this);
+  
+};
+
+treeMethods.traverse = function(callback) {
+  var applyCallbackRecursively = function (node) {
+    callback(node.value);
+    if (node.children.length > 0) {
+      node.children.forEach(function(child) {
+        applyCallbackRecursively(child);
+      })
+    }
+  }
+  return applyCallbackRecursively(this);
 };
 
 treeMethods.contains = function(target) {
