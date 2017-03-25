@@ -62,6 +62,9 @@ HashTable.prototype.insert = function(k, v) {
   this._storage.get(index).forEach(function(innerArray, ind, bucket) {
     if (innerArray[0] === k) {
       bucket.splice(ind, 1);
+      this._counter--; // counter needs to be decremented if key
+      // is already there because you are not adding a new key
+      // so this basically counteracts the ++ on the counter earlier.
     }
   });
   
