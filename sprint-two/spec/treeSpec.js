@@ -41,4 +41,17 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should have methods named "traverse" and "removeFromParent", and a property named "parent"', function() {
+    expect(tree.removeFromParent).to.be.a('function');
+    expect(tree.traverse).to.be.a('function');
+    expect(tree.hasOwnProperty('parent')).to.equal(true);
+  });
+
+  it('should correctly identify parent value', function() {
+    tree.addChild(56);
+    tree.addChild(76);
+    tree.children[0].addChild(98);
+    expect(tree.children[0].children[0].parent.value).to.equal(56);
+  })
+
 });
