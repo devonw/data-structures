@@ -73,4 +73,15 @@ describe('hashTable', function() {
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
   });
+
+  it ('should retain all values after resizing', function() {
+    _.each(people, function(person) {
+      var firstName = person[0];
+      var lastName = person[1];
+      hashTable.insert(firstName, lastName);
+      expect(hashTable.retrieve(firstName)).to.equal(lastName);
+      });
+      expect(hashTable._limit).to.equal(16);
+      expect(hashTable.retrieve('Steven')).to.equal('Tyler');
+  });
 });

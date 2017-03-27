@@ -52,6 +52,6 @@ describe('tree', function() {
     tree.addChild(76);
     tree.children[0].addChild(98);
     expect(tree.children[0].children[0].parent.value).to.equal(56);
-  })
+  });
 
 });
